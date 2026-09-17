@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Habit Tracker Pro</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>🔥 AI Habit Tracker Pro</h1>
+
+        <p>
+            Build better habits. Stay consistent. Improve daily.
+        </p>
+
+    </div>
+
+    <!-- Dashboard -->
+
+    <div class="dashboard">
+
+        <div class="card">
+
+            <h3>Total Habits</h3>
+
+            <p>{{ total_habits }}</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Highest Streak</h3>
+
+            <p>🔥 {{ highest_streak }}</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Total Streaks</h3>
+
+            <p>{{ total_streaks }}</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Best Habit</h3>
+
+            <p>{{ best_habit }}</p>
+
+        </div>
+
+    </div>
+
+    <div class="report-section">
+
+    <a href="/report"
+       class="report-btn">
+
+        📄 Download PDF Report
+
+    </a>
+
+</div>
+
+    <!-- AI Coach -->
+
+    <div class="ai-card">
+
+        <h2>🤖 AI Habit Coach</h2>
+
+        <p>{{ ai_advice }}</p>
+
+    </div>
+
+    <!-- Achievement Badge -->
+
+<div class="badge-card">
+
+    <h2>🏅 Achievement Badge</h2>
+
+    <h1>{{ badge }}</h1>
+
+</div>
+
+    <!-- Add Habit -->
+
+    <div class="form-card">
+
+        <form action="/add" method="POST">
+
+            <input
+                type="text"
+                name="habit"
+                placeholder="Enter Habit Name"
+                required>
+
+            <button type="submit">
+
+                Add Habit
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Analytics -->
+
+    <div class="chart-box">
+
+        <h2>📊 Habit Analytics</h2>
+
+        <img src="/chart">
+
+    </div>
+
+    <!-- Habits -->
+
+    {% for habit in habits %}
+
+    <div class="habit-card">
+
+        <div class="habit-left">
+
+            <h2>{{ habit[1] }}</h2>
+
+            <p>
+
+                🔥 Streak:
+                {{ habit[2] }}
+
+            </p>
+
+        </div>
+
+        <div class="habit-right">
+
+            <a class="complete-btn"
+               href="/complete/{{ habit[0] }}">
+
+                ✅ Complete
+
+            </a>
+
+            <a class="delete-btn"
+               href="/delete/{{ habit[0] }}">
+
+                ❌ Delete
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+
+</html>
